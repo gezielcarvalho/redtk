@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-// import { addCustomer } from "../feature/customerSlice";
+import { addCustomer } from "../features/customersSlice";
 import { removeReservation } from "../features/reservationsSlice";
-// import { v4 as uuid } from "uuid";
+import { v4 as uuid } from "uuid";
 
 interface IReservationCardType {
   name: string;
@@ -16,13 +16,13 @@ function ReservationCard({ name, index }: IReservationCardType) {
       className="reservation-card-container"
       onClick={() => {
         dispatch(removeReservation(index));
-        // dispatch(
-        //   addCustomer({
-        //     id: uuid(),
-        //     name,
-        //     food: [],
-        //   })
-        // );
+        dispatch(
+          addCustomer({
+            id: uuid(),
+            name,
+            food: [],
+          })
+        );
       }}
     >
       <p>{name}</p>
