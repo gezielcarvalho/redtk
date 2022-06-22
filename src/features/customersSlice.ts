@@ -6,6 +6,10 @@ interface ICustomer {
     food: string[];
 }
 
+interface IFood {
+    id: string,
+    food: string
+}
 interface ICustomerState {
     value: ICustomer[]
 }
@@ -19,13 +23,17 @@ export const customersSlice = createSlice({
         addCustomer: (state, action: PayloadAction<ICustomer> ) => {
             state.value.push(action.payload);
         },
-        // removeCustomer: (state, action: PayloadAction<number>) => {
-        //     state.value.splice(action.payload,1);
-        // },
+        addFoodToCustomer: (state, action: PayloadAction<IFood>) => {
+            state.value.filter((customer)=>{
+                if (customer.id==action.payload.id) {
+                    customer.food.push(action.payload.food);
+                }
+            });
+        },
     }
 });
 
-export const { addCustomer } = customersSlice.actions;
+export const { addCustomer, addFoodToCustomer } = customersSlice.actions;
 
 export default customersSlice.reducer;
 
